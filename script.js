@@ -25,7 +25,7 @@
       const boxes = door.querySelector(".boxes");
       const duration = parseInt(boxes.style.transitionDuration);
       boxes.style.transform = "translateY(0)";
-      await new Promise((resolve) => setTimeout(resolve, duration * 100));
+      await new Promise((resolve) => setTimeout(resolve, duration * 1000));
     }
   }
 
@@ -71,12 +71,13 @@
 
         boxesClone.addEventListener(
           "transitionend",
-          function () {
+          async function () {
             this.querySelectorAll(".box").forEach((box, index) => {
               box.style.filter = "blur(0)";
               box.textContent = emp.arr[d_no];
               if (index > 0) this.removeChild(box);
             });
+            await new Promise((resolve) => setTimeout(resolve, duration * 5000));
             document.getElementById("namebox").textContent = emp.name;
           },
           { once: true }
